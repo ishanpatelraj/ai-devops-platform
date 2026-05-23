@@ -29,15 +29,15 @@ def send_metric():
         if elapsed > 0:
             bytes_sent = curr_net_io.bytes_sent - last_net_io.bytes_sent
             bytes_recv = curr_net_io.bytes_recv - last_net_io.bytes_recv
-            # Convert bytes to MB, divide by seconds to get MB/s
-            network_mb_s = ((bytes_sent + bytes_recv) / 1024 / 1024) / elapsed
+            # Convert bytes to KB, divide by seconds to get KB/s
+            network_kb_s = ((bytes_sent + bytes_recv) / 1024) / elapsed
         else:
-            network_mb_s = 0.0
+            network_kb_s = 0.0
             
         last_net_io = curr_net_io
         last_net_time = curr_net_time
         
-        network_usage = round(network_mb_s, 2)
+        network_usage = round(network_kb_s, 2)
         
         payload = {
             "serverId": SERVER_ID,
@@ -49,7 +49,7 @@ def send_metric():
         
         res = requests.post(f"{BACKEND_URL}/api/metrics", json=payload, timeout=5)
         if res.status_code == 201:
-            print(f"[METRIC] Sent: CPU {cpu}%, MEM {mem}%, DISK {disk}%, NET {network_usage} MB/s")
+            print(f"[METRIC] Sent: CPU {cpu}%, MEM {mem}%, DISK {disk}%, NET {network_usage} KB/s")
         else:
             print(f"[METRIC] Failed to send metric. Status: {res.status_code}, {res.text}")
             

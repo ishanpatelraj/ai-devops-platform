@@ -76,7 +76,7 @@ export default function Dashboard() {
         <MetricCard title="CPU Usage"    value={metrics.cpu}    unit="%" icon={Cpu}        trend="up"     trendValue="" index={0} />
         <MetricCard title="Memory"       value={metrics.memory} unit="%" icon={MemoryStick} trend="stable" trendValue="" index={1} />
         <MetricCard title="Disk Usage"   value={metrics.disk}   unit="%" icon={HardDrive}   trend="up"     trendValue="" index={2} />
-        <MetricCard title="Network I/O"  value={metrics.network}unit="MB/s" icon={Network} trend="down"   trendValue="" index={3} />
+        <MetricCard title="Network I/O"  value={metrics.network}unit="KB/s" icon={Network} trend="down"   trendValue="" index={3} />
       </div>
 
       <hr className="border-t-4 border-foreground" />
