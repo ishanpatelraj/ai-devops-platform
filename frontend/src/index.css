@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400;1,600;1,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    min-height: 100vh;
+  }
+
+  /* Global Noise Texture */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.02;
+  }
+
+  ::-webkit-scrollbar       { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: #FFFFFF; border-left: 1px solid #E5E5E5; }
+  ::-webkit-scrollbar-thumb { background: #000000; border-radius: 0px; }
+  ::-webkit-scrollbar-thumb:hover { background: #525252; }
+}
+
+@layer components {
+  /* ── Background Patterns ──────────────────────────── */
+  .bg-grid {
+    background-image:
+      linear-gradient(#00000008 1px, transparent 1px),
+      linear-gradient(90deg, #00000008 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .bg-lines {
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0, 0, 0, 0.015) 1px, rgba(0, 0, 0, 0.015) 2px);
+    background-size: 100% 4px;
+  }
+
+  /* ── Cards ────────────────────────────────────────── */
+  .card {
+    @apply bg-card text-cardForeground border-border border p-6 transition-all duration-100;
+  }
+  
+  .card-hoverable {
+    @apply hover:bg-foreground hover:text-background hover:border-foreground;
+  }
+
+  /* ── Live pulse dot (Monochrome) ──────────────────── */
+  .dot-live {
+    @apply relative inline-flex h-2 w-2;
+  }
+  .dot-live::after {
+    @apply relative inline-flex h-2 w-2 rounded-none;
+    content: '';
+    background: currentColor;
+  }
+
+  /* ── Severity badges ──────────────────────────────── */
+  .badge { @apply inline-flex items-center px-2 py-0.5 rounded-none text-xs font-mono font-medium uppercase border-border border bg-background text-foreground; }
+  .badge-critical { @apply border-2; }
+  .badge-warning  { @apply border bg-muted text-foreground; }
+  .badge-error    { @apply border-2; }
+  .badge-info     { @apply border-t-2; }
+
+  /* ── Buttons ──────────────────────────────────────── */
+  .btn {
+    @apply inline-flex items-center gap-2 px-8 py-4 rounded-none text-sm font-medium transition-all duration-100 cursor-pointer select-none uppercase tracking-widest border-2 border-transparent;
+  }
+  
+  .btn-primary {
+    @apply bg-foreground text-background;
+  }
+  .btn-primary:hover {
+    @apply bg-background text-foreground border-foreground;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent text-foreground border-foreground border-2 hover:bg-foreground hover:text-background;
+  }
+
+  /* ── Sidebar nav item ─────────────────────────────── */
+  .nav-item {
+    @apply flex items-center gap-3 px-3 py-3 rounded-none text-sm font-medium text-mutedForeground transition-all duration-100 cursor-pointer border-l-4 border-transparent;
+  }
+  .nav-item:hover           { @apply text-foreground bg-muted; }
+  .nav-item.active          { @apply text-foreground bg-background border-foreground font-bold; }
+  .nav-item.active svg      { @apply text-foreground stroke-[2px]; }
+
+  /* ── Text gradient ────────────────────────────────── */
+  /* Replaced with solid text for monochrome */
+  .text-gradient {
+    @apply text-foreground;
+  }
+  .text-gradient-violet {
+    @apply text-foreground italic font-serif;
+  }
+
+  /* ── Input ────────────────────────────────────────── */
+  .input {
+    @apply w-full px-4 py-3 rounded-none bg-background border-b-2 border-l-0 border-r-0 border-t-0 border-border text-foreground text-sm placeholder-mutedForeground transition-all duration-100 outline-none;
+  }
+  .input:focus { @apply border-b-4 border-foreground outline-none ring-0; }
+  
+  /* ── Focus ────────────────────────────────────────── */
+  *:focus-visible {
+    @apply outline-none outline-3 outline-offset-3 outline-foreground;
+  }
+}

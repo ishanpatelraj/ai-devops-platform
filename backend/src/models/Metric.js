@@ -18,6 +18,11 @@ const metricSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    networkUsage: {
+        type: Number,
+        required: true,
+        default: 0
+    },
     timestamp: {
         type: Date,
         default: Date.now,
