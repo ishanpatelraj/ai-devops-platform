@@ -12,9 +12,9 @@
 
 | Live Dashboard (Real-time Metrics) | Alert Center (ML Anomalies) |
 | :---: | :---: |
-| ![Dashboard Placeholder](screenshots/dashboard.png) | ![Alerts Placeholder](screenshots/alerts.png) |
+| ![Dashboard Placeholder](screenshots/Dashboard.png) | ![Alerts Placeholder](screenshots/Alert.png) |
 | **Server Management & Status** | **Log Stream & Classification** |
-| ![Servers Placeholder](screenshots/servers.png) | ![Logs Placeholder](screenshots/logs.png) |
+| ![Servers Placeholder](screenshots/Server.png) | ![Logs Placeholder](screenshots/Logs.png) |
 
 ---
 
